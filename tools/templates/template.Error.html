@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+{% include 'template.head.html' %}
+{% block css %}
+    <!-- CSS -->
+{% endblock css %}
+{% block content %}
+{% include 'template.navbar.html' %}
+<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<br><br><br>
+				<div class="jumbotron">
+					<h1>404 Not Found</h1>
+					<p><a class="btn btn-primary btn-lg" href="https://developer.mozilla.org/es/docs/Web/HTTP/Status" role="button">Aprende más</a></p></div>
+			</div>
+		</div>
+</div>
+{% endblock %}
+{% include 'template.footer.html' %}
+</html>
