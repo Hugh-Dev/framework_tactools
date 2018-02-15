@@ -21,6 +21,7 @@ import requests
 import re
 import urllib
 from geoip import geolite2
+import datetime
 # Create your views here.
 
 
@@ -50,13 +51,32 @@ def tactools(request):
         return render(request, 'template.Error.html')
 
 def info(request):
-    pass
+    return render(request, 'template.info.html')
 
 def usuario(request):
-    pass
+    if request.method == 'GET':
+        user = os.getlogin()
+        OS = os.name
+        print(OS)
+        sys = os.uname()
+        print(sys)
+        return render(request, 'template.tools.html', {'user': user})
 
 def direccion(request):
-    pass
-
-def tetsvelocidad(request):
-    pass
+    if request.method == 'GET':
+        try:
+            url = "www.showmyip.gr"
+            r  = requests.get("http://" +url)
+            data = r.text
+            soup = BeautifulSoup(data, 'html.parser')
+            span = soup.find("span", class_="ip_address")
+            ip = span.text
+            return render(request, 'template.tools.html', {'ip': ip})
+        except:
+            return render(request, 'template.Error.html')
+    else:
+        return render(request, 'template.Error.html')
+def testvelocidad(request):
+    date = datetime.datetime.now()
+    results = commands.getoutput('speedtest-cli --simple')
+    return render(request, 'template.tools.html', {'date': date, 'results': results })
